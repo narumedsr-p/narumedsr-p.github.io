@@ -15,7 +15,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   <!-- Hero -->
   <section class="max-w-4xl mx-auto px-6 pt-20 pb-16">
     <div class="max-w-2xl">
-      <h1 class="font-serif text-5xl sm:text-6xl text-ink-900 mb-5 leading-tight">
+      <h1 class="text-5xl sm:text-6xl font-bold text-ink-900 mb-5 leading-tight tracking-tight">
         Your Name
       </h1>
       <p class="text-xl text-ink-500 mb-2 font-light">
@@ -52,8 +52,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {projects.map(p => (
         <a href={`/projects/${p.slug}`} class="group block bg-paper-50 border border-paper-300 rounded-lg p-5 hover:border-ink-100 hover:shadow-sm transition-all">
-          <h3 class="font-semibold text-ink-900 group-hover:text-accent transition-colors mb-2">{p.data.title}</h3>
-          <p class="text-ink-500 text-base leading-relaxed mb-4 line-clamp-3">{p.data.description}</p>
+          <h3 class="text-lg font-semibold text-ink-900 group-hover:text-accent transition-colors mb-2">{p.data.title}</h3>
+          <p class="text-ink-500 text-sm leading-relaxed mb-4 line-clamp-3">{p.data.description}</p>
           <div class="flex flex-wrap gap-1.5">
             {p.data.tech.slice(0, 3).map((t: string) => <span class="chip">{t}</span>)}
           </div>

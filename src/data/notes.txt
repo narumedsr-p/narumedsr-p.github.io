@@ -1,0 +1,12 @@
+# Notes — one line per entry, format: YYYY-MM-DD | your thought
+# Lines starting with # are ignored. Newest at the bottom, site shows newest first.
+
+2025-01-10 | Started the portfolio project — figuring out which stack to use.
+2025-02-01 | Decided on Astro + Tailwind. Zero-JS by default is a great constraint.
+2025-02-20 | Learning that content-first design is harder than it sounds.
+2025-03-05 | Tried deploying to GitHub Pages. GitHub Actions workflow took 3 tries to get right.
+2025-03-18 | Reading about spaced repetition — the gap between knowing and remembering is huge.
+2025-04-02 | Finished the ML specialization. The most useful part was seeing what the math actually looks like in code.
+2025-04-15 | Writing a blog post forces you to find gaps in your own understanding. Highly recommend.
+2025-05-01 | Good code is more about clarity than cleverness. Took me too long to learn this.
+2025-05-10 | Starting Full Stack Open. The exercises are hard in a good way.
