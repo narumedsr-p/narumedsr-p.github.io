@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Best Project Award",
+    "organization": "University / Hackathon Name",
+    "year": 2024,
+    "description": "Awarded for outstanding project design and implementation at the annual university showcase.",
+    "link": ""
+  },
+  {
+    "title": "Dean's List",
+    "organization": "Your University",
+    "year": 2023,
+    "description": "Recognized for academic excellence with GPA in the top percentile of the department.",
+    "link": ""
+  },
+  {
+    "title": "Hackathon Finalist",
+    "organization": "Hackathon Name",
+    "year": 2024,
+    "description": "Reached the finals among 200+ teams with a machine learning solution for real-world data.",
+    "link": ""
+  }
+]

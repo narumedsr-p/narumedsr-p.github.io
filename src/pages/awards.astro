@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+import awards from '../data/awards.json';
+
+const sorted = [...awards].sort((a, b) => b.year - a.year);
+---
+
+<Layout title="Awards" description="My awards, honors, and recognitions.">
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <div class="mb-10">
+      <h1 class="font-serif text-4xl text-ink-900 mb-3">Awards</h1>
+      <p class="text-ink-500">Honors, competitions, and academic achievements.</p>
+    </div>
+
+    <div class="divide-y divide-paper-300 border-t border-paper-300">
+      {sorted.map(award => (
+        <div class="py-6 flex flex-col sm:flex-row sm:gap-8">
+          <!-- Year -->
+          <div class="sm:w-16 sm:flex-shrink-0 mb-2 sm:mb-0">
+            <span class="font-mono text-sm font-medium text-ink-900">{award.year}</span>
+          </div>
+          <!-- Content -->
+          <div class="flex-1">
+            <h2 class="font-serif text-xl text-ink-900 mb-0.5">
+              {award.link
+                ? <a href={award.link} target="_blank" rel="noopener" class="hover:text-accent transition-colors">{award.title} ↗</a>
+                : award.title
+              }
+            </h2>
+            <p class="text-sm text-ink-500 mb-2">{award.organization}</p>
+            {award.description && <p class="text-sm text-ink-500 leading-relaxed">{award.description}</p>}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {awards.length === 0 && (
+      <div class="text-center py-16 text-ink-100">
+        <p class="mb-3">No awards yet.</p>
+        <p class="text-sm">Edit <code class="font-mono text-xs bg-paper-200 px-2 py-0.5 rounded">src/data/awards.json</code></p>
+      </div>
+    )}
+
+    <!-- How to add -->
+    <div class="mt-14 bg-paper-200 border border-paper-300 rounded-lg p-5">
+      <p class="font-mono text-xs text-ink-300 mb-2">// add an award — append to src/data/awards.json</p>
+      <pre class="text-xs text-ink-500 leading-relaxed overflow-x-auto">{`{
+  "title": "Award Name",
+  "organization": "Organization",
+  "year": 2025,
+  "description": "What it was for.",
+  "link": "https://..."
+}`}</pre>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "CS50: Introduction to Computer Science",
+    "provider": "Harvard / edX",
+    "status": "completed",
+    "date": "2023-06",
+    "certificate": "https://certificates.cs50.io/",
+    "description": "Comprehensive intro to CS covering C, Python, SQL, and web development."
+  },
+  {
+    "name": "Machine Learning Specialization",
+    "provider": "Coursera / Andrew Ng",
+    "status": "completed",
+    "date": "2024-01",
+    "certificate": "https://coursera.org/",
+    "description": "Supervised/unsupervised learning, neural networks, and best practices."
+  },
+  {
+    "name": "Full Stack Open",
+    "provider": "University of Helsinki",
+    "status": "in-progress",
+    "date": "2025-03",
+    "certificate": "",
+    "description": "Modern web development with React, Node.js, GraphQL, and TypeScript."
+  },
+  {
+    "name": "Deep Learning Specialization",
+    "provider": "Coursera / deeplearning.ai",
+    "status": "planned",
+    "date": "2025-Q3",
+    "certificate": "",
+    "description": "CNN, RNN, transformers, and production ML systems."
+  },
+  {
+    "name": "AWS Solutions Architect",
+    "provider": "Amazon / A Cloud Guru",
+    "status": "planned",
+    "date": "2026-Q1",
+    "certificate": "",
+    "description": "Cloud infrastructure, deployment, and cost optimization on AWS."
+  }
+]

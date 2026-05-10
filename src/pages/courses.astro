@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+import courses from '../data/courses.json';
+
+const completed  = courses.filter(c => c.status === 'completed');
+const inProgress = courses.filter(c => c.status === 'in-progress');
+const planned    = courses.filter(c => c.status === 'planned');
+---
+
+<Layout title="Courses" description="Courses I've taken and my learning roadmap.">
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <div class="mb-10">
+      <h1 class="font-serif text-4xl text-ink-900 mb-3">Learning</h1>
+      <p class="text-ink-500">Courses completed, in progress, and planned.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex items-center gap-6 mb-12 text-sm">
+      <div><span class="font-semibold text-ink-900 text-xl">{completed.length}</span> <span class="text-ink-300 ml-1">completed</span></div>
+      <div class="w-px h-4 bg-paper-300"></div>
+      <div><span class="font-semibold text-ink-900 text-xl">{inProgress.length}</span> <span class="text-ink-300 ml-1">in progress</span></div>
+      <div class="w-px h-4 bg-paper-300"></div>
+      <div><span class="font-semibold text-ink-900 text-xl">{planned.length}</span> <span class="text-ink-300 ml-1">planned</span></div>
+    </div>
+
+    <!-- In Progress -->
+    {inProgress.length > 0 && (
+      <section class="mb-12">
+        <h2 class="font-serif text-xl text-ink-900 mb-4 flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          Currently Learning
+        </h2>
+        <div class="divide-y divide-paper-300 border-t border-b border-paper-300">
+          {inProgress.map(c => (
+            <div class="py-4">
+              <div class="flex flex-wrap items-start justify-between gap-2">
+                <div>
+                  <p class="font-medium text-ink-900">{c.name}</p>
+                  <p class="text-sm text-ink-500 mt-0.5">{c.provider}</p>
+                  {c.description && <p class="text-base text-ink-500 mt-2 leading-relaxed max-w-lg">{c.description}</p>}
+                </div>
+                {c.date && <span class="font-mono text-xs text-ink-100 mt-0.5 flex-shrink-0">{c.date}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Completed -->
+    <section class="mb-12">
+      <h2 class="font-serif text-xl text-ink-900 mb-4 flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+        Completed
+      </h2>
+      <div class="divide-y divide-paper-300 border-t border-b border-paper-300">
+        {completed.map(c => (
+          <div class="py-4">
+            <div class="flex flex-wrap items-start justify-between gap-2">
+              <div>
+                <p class="font-medium text-ink-900">{c.name}</p>
+                <p class="text-sm text-ink-500 mt-0.5">{c.provider}</p>
+                {c.description && <p class="text-base text-ink-500 mt-2 leading-relaxed max-w-lg">{c.description}</p>}
+              </div>
+              <div class="flex flex-col items-end gap-1.5 flex-shrink-0">
+                {c.date && <span class="font-mono text-xs text-ink-100">{c.date}</span>}
+                {c.certificate && (
+                  <a href={c.certificate} target="_blank" rel="noopener"
+                     class="text-xs text-accent hover:underline underline-offset-4">
+                    Certificate ↗
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Planned -->
+    <section>
+      <h2 class="font-serif text-xl text-ink-900 mb-4 flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-paper-400 border border-paper-400"></span>
+        Planned
+      </h2>
+      <div class="divide-y divide-paper-300 border-t border-b border-paper-300">
+        {planned.map(c => (
+          <div class="py-4 opacity-70">
+            <div class="flex flex-wrap items-start justify-between gap-2">
+              <div>
+                <p class="font-medium text-ink-700">{c.name}</p>
+                <p class="text-sm text-ink-500 mt-0.5">{c.provider}</p>
+                {c.description && <p class="text-base text-ink-500 mt-2 leading-relaxed max-w-lg">{c.description}</p>}
+              </div>
+              {c.date && <span class="font-mono text-xs text-ink-100 mt-0.5 flex-shrink-0">{c.date}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- How to add -->
+    <div class="mt-14 bg-paper-200 border border-paper-300 rounded-lg p-5">
+      <p class="font-mono text-xs text-ink-300 mb-2">// add a course — append to src/data/courses.json</p>
+      <pre class="text-xs text-ink-500 leading-relaxed overflow-x-auto">{`{
+  "name": "Course Name",
+  "provider": "Platform",
+  "status": "planned",   // "completed" | "in-progress" | "planned"
+  "date": "2025-Q3",
+  "certificate": "https://...",
+  "description": "What it covers."
+}`}</pre>
+    </div>
+  </div>
+</Layout>

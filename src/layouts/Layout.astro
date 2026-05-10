@@ -1,0 +1,124 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'My personal portfolio — projects, blog, courses, and more.' } = Astro.props;
+const nav = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/awards',   label: 'Awards'   },
+  { href: '/courses',  label: 'Courses'  },
+  { href: '/blog',     label: 'Blog'     },
+  { href: '/notes',    label: 'Notes'    },
+];
+const path = new URL(Astro.request.url).pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title} | Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-paper-100 text-ink-700 font-sans antialiased min-h-screen flex flex-col text-base">
+
+    <nav class="sticky top-0 z-50 bg-paper-50/90 backdrop-blur-sm border-b border-paper-300">
+      <div class="max-w-4xl mx-auto px-6 flex items-center justify-between h-14">
+        <a href="/" class="font-serif text-ink-900 text-lg hover:text-accent transition-colors">
+          Portfolio
+        </a>
+        <div class="hidden sm:flex items-center gap-7 text-sm text-ink-300 font-medium">
+          {nav.map(n => (
+            <a
+              href={n.href}
+              class={`hover:text-ink-900 transition-colors pb-0.5 border-b-2 ${path.startsWith(n.href) ? 'border-accent text-ink-900' : 'border-transparent'}`}
+            >{n.label}</a>
+          ))}
+        </div>
+        <button id="menu-toggle" class="sm:hidden text-ink-300 hover:text-ink-900" aria-label="Toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden sm:hidden border-t border-paper-300 bg-paper-50">
+        <div class="flex flex-col px-6 py-3 gap-4 text-sm">
+          {nav.map(n => (
+            <a href={n.href} class="text-ink-500 hover:text-ink-900 transition-colors">{n.label}</a>
+          ))}
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="border-t border-paper-300 mt-24">
+      <div class="max-w-4xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-ink-100">
+        <p>Built with Astro + Tailwind CSS</p>
+        <div class="flex items-center gap-5">
+          <a href="https://github.com/narumedsr-p" target="_blank" rel="noopener" class="hover:text-ink-700 transition-colors">GitHub</a>
+          <a href="/blog" class="hover:text-ink-700 transition-colors">Blog</a>
+          <a href="/notes" class="hover:text-ink-700 transition-colors">Notes</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('menu-toggle')?.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  html { scroll-behavior: smooth; }
+  body { font-size: 16.5px; }
+
+  ::selection { background: #c7d2fe; color: #1e1b4b; }
+
+  /* Shared prose styles for blog/project markdown content */
+  .prose h2 { font-family: 'DM Sans', sans-serif; font-size: 1.45rem; font-weight: 700; color: #0f0f0f; margin: 2.5rem 0 0.75rem; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; font-weight: 600; color: #1a1a1a; margin: 1.75rem 0 0.5rem; }
+  .prose p  { font-family: 'DM Sans', sans-serif; color: #374151; line-height: 1.8; margin: 1rem 0; font-size: 1rem; }
+  .prose ul { list-style: disc; padding-left: 1.5rem; margin: 1rem 0; }
+  .prose ul li { font-family: 'DM Sans', sans-serif; color: #374151; line-height: 1.75; margin: 0.25rem 0; }
+  .prose ol { list-style: decimal; padding-left: 1.5rem; margin: 1rem 0; }
+  .prose ol li { font-family: 'DM Sans', sans-serif; color: #374151; line-height: 1.75; margin: 0.25rem 0; }
+  .prose a { color: #4338ca; text-decoration: underline; text-underline-offset: 3px; }
+  .prose strong { color: #1a1a1a; font-weight: 600; }
+  .prose blockquote { border-left: 2px solid #d6d3d1; padding-left: 1.25rem; margin: 1.5rem 0; }
+  .prose blockquote p { color: #4b5563; font-style: italic; }
+  .prose code { font-family: 'DM Sans', sans-serif; font-size: 0.88em; background: #f5f5f4; border: 1px solid #e7e5e4; padding: 0.15em 0.45em; border-radius: 4px; color: #374151; }
+  .prose pre  { background: #1c1917; border-radius: 8px; padding: 1.25rem 1.5rem; overflow-x: auto; margin: 1.5rem 0; }
+  .prose pre code { background: none; border: none; color: #e7e5e4; font-size: 0.9em; padding: 0; }
+  .prose hr { border-color: #e7e5e4; margin: 2rem 0; }
+
+  /* Tag chip */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 11px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    background: #f5f5f4;
+    border: 1px solid #e7e5e4;
+    color: #4b5563;
+  }
+
+  .chip-accent {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+    color: #4338ca;
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(p => ({ params: { slug: p.slug }, props: { entry: p } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const readingTime = Math.max(1, Math.round(entry.body.trim().split(/\s+/).length / 200));
+---
+
+<Layout title={entry.data.title} description={entry.data.description}>
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <a href="/blog" class="inline-flex items-center gap-1.5 text-sm text-ink-300 hover:text-ink-900 transition-colors mb-10">
+      ← Writing
+    </a>
+
+    <header class="mb-10">
+      <h1 class="font-serif text-4xl sm:text-5xl text-ink-900 leading-tight mb-4">
+        {entry.data.title}
+      </h1>
+      <p class="text-ink-300 text-lg leading-relaxed mb-5">{entry.data.description}</p>
+      <div class="flex flex-wrap items-center gap-4 text-sm text-ink-100">
+        <time class="font-mono text-xs">
+          {entry.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        </time>
+        <span class="text-paper-400">·</span>
+        <span class="font-mono text-xs">{readingTime} min read</span>
+        <div class="flex flex-wrap gap-1.5 ml-1">
+          {entry.data.tags.map((t: string) => <span class="chip">{t}</span>)}
+        </div>
+      </div>
+    </header>
+
+    <hr class="border-paper-300 mb-10" />
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <hr class="border-paper-300 mt-14 mb-8" />
+    <a href="/blog" class="text-sm text-accent hover:underline underline-offset-4">← All posts</a>
+  </div>
+</Layout>

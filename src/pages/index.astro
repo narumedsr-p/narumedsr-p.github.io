@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft && data.featured))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<Layout title="Home">
+  <!-- Hero -->
+  <section class="max-w-4xl mx-auto px-6 pt-20 pb-16">
+    <div class="max-w-2xl">
+      <h1 class="font-serif text-5xl sm:text-6xl text-ink-900 mb-5 leading-tight">
+        Your Name
+      </h1>
+      <p class="text-xl text-ink-500 mb-2 font-light">
+        <span id="typewriter"></span><span class="tw-cursor">|</span>
+      </p>
+      <p class="text-ink-500 mt-5 text-base leading-relaxed max-w-lg">
+        I build things for the web, explore machine learning, and write about what I learn.
+        Currently focused on [your current focus here].
+      </p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a href="/projects" class="px-5 py-2.5 rounded-md text-sm font-medium bg-ink-900 text-paper-50 hover:bg-ink-700 transition-colors">
+          View Projects
+        </a>
+        <a href="/blog" class="px-5 py-2.5 rounded-md text-sm font-medium border border-paper-400 text-ink-500 hover:border-ink-300 hover:text-ink-900 transition-colors">
+          Read Blog
+        </a>
+        <a href="https://github.com/narumedsr-p" target="_blank" rel="noopener" class="px-5 py-2.5 rounded-md text-sm font-medium border border-paper-400 text-ink-500 hover:border-ink-300 hover:text-ink-900 transition-colors">
+          GitHub ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-6">
+    <hr class="border-paper-300" />
+  </div>
+
+  <!-- Featured Projects -->
+  <section class="max-w-4xl mx-auto px-6 py-14">
+    <div class="flex items-baseline justify-between mb-8">
+      <h2 class="font-serif text-2xl text-ink-900">Featured Projects</h2>
+      <a href="/projects" class="text-sm text-accent hover:underline underline-offset-4">View all →</a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {projects.map(p => (
+        <a href={`/projects/${p.slug}`} class="group block bg-paper-50 border border-paper-300 rounded-lg p-5 hover:border-ink-100 hover:shadow-sm transition-all">
+          <h3 class="font-semibold text-ink-900 group-hover:text-accent transition-colors mb-2">{p.data.title}</h3>
+          <p class="text-ink-500 text-base leading-relaxed mb-4 line-clamp-3">{p.data.description}</p>
+          <div class="flex flex-wrap gap-1.5">
+            {p.data.tech.slice(0, 3).map((t: string) => <span class="chip">{t}</span>)}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-6">
+    <hr class="border-paper-300" />
+  </div>
+
+  <!-- Latest Posts -->
+  <section class="max-w-4xl mx-auto px-6 py-14">
+    <div class="flex items-baseline justify-between mb-8">
+      <h2 class="font-serif text-2xl text-ink-900">Latest Posts</h2>
+      <a href="/blog" class="text-sm text-accent hover:underline underline-offset-4">View all →</a>
+    </div>
+    <div class="flex flex-col divide-y divide-paper-300">
+      {posts.map(post => (
+        <a href={`/blog/${post.slug}`} class="group flex items-start justify-between gap-6 py-5">
+          <div class="min-w-0">
+            <h3 class="font-medium text-ink-900 group-hover:text-accent transition-colors mb-1">{post.data.title}</h3>
+            <p class="text-ink-500 text-base leading-relaxed line-clamp-2">{post.data.description}</p>
+          </div>
+          <time class="text-xs text-ink-100 whitespace-nowrap mt-1">
+            {post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          </time>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-6">
+    <hr class="border-paper-300" />
+  </div>
+
+  <!-- Quick nav -->
+  <section class="max-w-4xl mx-auto px-6 py-14">
+    <div class="grid sm:grid-cols-3 gap-4">
+      {[
+        { href: '/awards',  label: 'Awards',  desc: 'Achievements & recognitions' },
+        { href: '/courses', label: 'Courses', desc: 'Completed & planned learning' },
+        { href: '/notes',   label: 'Notes',   desc: 'Quick thoughts & ideas'       },
+      ].map(item => (
+        <a href={item.href} class="group block bg-paper-50 border border-paper-300 rounded-lg px-5 py-4 hover:border-ink-100 hover:shadow-sm transition-all">
+          <p class="font-semibold text-ink-900 group-hover:text-accent transition-colors mb-0.5">{item.label}</p>
+          <p class="text-sm text-ink-500">{item.desc}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const roles = ['Full-stack Developer', 'ML Enthusiast', 'Problem Solver', 'Lifelong Learner'];
+  let ri = 0, ci = 0, del = false;
+  const el = document.getElementById('typewriter');
+  function tick() {
+    if (!el) return;
+    const r = roles[ri];
+    el.textContent = del ? r.slice(0, --ci) : r.slice(0, ++ci);
+    let t = del ? 45 : 90;
+    if (!del && ci === r.length) { t = 2000; del = true; }
+    else if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; t = 400; }
+    setTimeout(tick, t);
+  }
+  tick();
+</script>
+
+<style>
+  .tw-cursor { color: #4338ca; animation: blink 1s step-end infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+</style>

@@ -1,0 +1,95 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
+
+function readingTime(body: string) {
+  return Math.max(1, Math.round(body.trim().split(/\s+/).length / 200));
+}
+---
+
+<Layout title="Blog" description="Thoughts, notes, and things I've learned.">
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <div class="mb-10">
+      <h1 class="font-serif text-4xl text-ink-900 mb-3">Writing</h1>
+      <p class="text-ink-500">Notes on things I'm learning, building, and thinking about.</p>
+    </div>
+
+    <!-- Tag filter -->
+    {allTags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8" id="tag-filters">
+        <button data-tag="all" class="tag-btn chip chip-accent cursor-pointer">All</button>
+        {allTags.map(t => (
+          <button data-tag={t} class="tag-btn chip cursor-pointer hover:bg-paper-200 transition-colors">{t}</button>
+        ))}
+      </div>
+    )}
+
+    <!-- Post list - newspaper style -->
+    <div class="divide-y divide-paper-300" id="post-list">
+      {posts.map(post => (
+        <a href={`/blog/${post.slug}`} class="post-item group flex flex-col sm:flex-row sm:items-start sm:gap-6 py-6 block"
+           data-tags={post.data.tags.join(',')}>
+          <!-- Date column -->
+          <time class="font-mono text-xs text-ink-100 sm:w-28 sm:flex-shrink-0 mb-2 sm:mb-0 sm:pt-0.5">
+            {post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          </time>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <h2 class="font-serif text-xl text-ink-900 group-hover:text-accent transition-colors mb-1.5 leading-snug">
+              {post.data.title}
+            </h2>
+            <p class="text-ink-500 text-base leading-relaxed mb-3">{post.data.description}</p>
+            <div class="flex items-center gap-3">
+              <div class="flex flex-wrap gap-1.5">
+                {post.data.tags.map((t: string) => <span class="chip">{t}</span>)}
+              </div>
+              <span class="text-xs text-ink-100 ml-auto">{readingTime(post.body)} min</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {posts.length === 0 && (
+      <div class="text-center py-16 text-ink-100">
+        <p class="mb-3">No posts yet.</p>
+        <p class="text-sm">Create <code class="font-mono text-xs bg-paper-200 px-2 py-0.5 rounded">src/content/blog/my-post.md</code> to get started.</p>
+      </div>
+    )}
+
+    <!-- How to add -->
+    <div class="mt-12 bg-paper-200 border border-paper-300 rounded-lg p-5">
+      <p class="font-mono text-xs text-ink-300 mb-2">// add a post</p>
+      <pre class="text-xs text-ink-500 leading-relaxed overflow-x-auto">{`# Create src/content/blog/my-post.md
+---
+title: "Post Title"
+date: 2025-06-01
+description: "One-line summary."
+tags: ["topic"]
+---
+Write in Markdown.`}</pre>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const btns = document.querySelectorAll('.tag-btn');
+  const items = document.querySelectorAll('.post-item') as NodeListOf<HTMLElement>;
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => { b.classList.remove('chip-accent'); b.classList.add('chip'); });
+      btn.classList.add('chip-accent');
+      const tag = btn.getAttribute('data-tag');
+      items.forEach(item => {
+        const tags = item.getAttribute('data-tags') || '';
+        item.style.display = (tag === 'all' || tags.split(',').includes(tag!)) ? '' : 'none';
+      });
+    });
+  });
+</script>
