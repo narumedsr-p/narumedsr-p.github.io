@@ -22,8 +22,7 @@ const path = new URL(Astro.request.url).pathname;
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
     <!-- Prevent flash of wrong theme -->
     <script is:inline>
-      const t = localStorage.getItem('theme') ??
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const t = localStorage.getItem('theme') ?? 'light';
       if (t === 'dark') document.documentElement.classList.add('dark');
     </script>
   </head>
