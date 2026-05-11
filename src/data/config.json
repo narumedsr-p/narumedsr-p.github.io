@@ -1,0 +1,9 @@
+{
+  "pages": [
+    { "key": "about",    "href": "/about",    "label": "About",    "enabled": true,  "quickLink": false },
+    { "key": "projects", "href": "/projects", "label": "Projects", "enabled": true,  "quickLink": false },
+    { "key": "awards",   "href": "/awards",   "label": "Awards",   "enabled": true,  "quickLink": true,  "desc": "Achievements & recognitions"  },
+    { "key": "courses",  "href": "/courses",  "label": "Courses",  "enabled": true,  "quickLink": true,  "desc": "Completed & planned learning"  },
+    { "key": "blog",     "href": "/blog",     "label": "Blog",     "enabled": true,  "quickLink": false }
+  ]
+}

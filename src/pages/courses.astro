@@ -64,8 +64,14 @@ const planned    = courses.filter(c => c.status === 'planned');
               </div>
               <div class="flex flex-col items-end gap-1.5 flex-shrink-0">
                 {c.date && <span class="font-mono text-xs text-ink-100">{c.date}</span>}
-                {c.certificate && (
-                  <a href={c.certificate} target="_blank" rel="noopener"
+                {(c as any).link && (
+                  <a href={String((c as any).link)} target="_blank" rel="noopener"
+                     class="text-xs text-accent hover:underline underline-offset-4">
+                    Syllabus ↗
+                  </a>
+                )}
+                {(c as any).certificate && (
+                  <a href={String((c as any).certificate)} target="_blank" rel="noopener"
                      class="text-xs text-accent hover:underline underline-offset-4">
                     Certificate ↗
                   </a>
@@ -99,17 +105,5 @@ const planned    = courses.filter(c => c.status === 'planned');
       </div>
     </section>
 
-    <!-- How to add -->
-    <div class="mt-14 bg-paper-200 border border-paper-300 rounded-lg p-5">
-      <p class="font-mono text-xs text-ink-300 mb-2">// add a course — append to src/data/courses.json</p>
-      <pre class="text-xs text-ink-500 leading-relaxed overflow-x-auto">{`{
-  "name": "Course Name",
-  "provider": "Platform",
-  "status": "planned",   // "completed" | "in-progress" | "planned"
-  "date": "2025-Q3",
-  "certificate": "https://...",
-  "description": "What it covers."
-}`}</pre>
-    </div>
   </div>
 </Layout>

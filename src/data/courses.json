@@ -1,42 +1,98 @@
 [
   {
-    "name": "CS50: Introduction to Computer Science",
-    "provider": "Harvard / edX",
+    "name": "Computer Programming",
+    "provider": "Chulalongkorn University",
     "status": "completed",
-    "date": "2023-06",
-    "certificate": "https://certificates.cs50.io/",
-    "description": "Comprehensive intro to CS covering C, Python, SQL, and web development."
+    "date": "2024-S1",
+    "link": "https://mycourseville-default.s3.ap-southeast-1.amazonaws.com/useruploaded_course_files/2024_1/56737/materials/Syllabus_2110101_2024s1-171879-17230100538065.pdf",
+    "description": "Python Programming, PyGame, Beautiful soup, Matplotlib, Data Science, Simulation, Debugging and Recursion, Linear Regrassion, Computer Vision."
   },
   {
-    "name": "Machine Learning Specialization",
-    "provider": "Coursera / Andrew Ng",
+    "name": "Computer Engineering Essential",
+    "provider": "Chulalongkorn University",
     "status": "completed",
-    "date": "2024-01",
-    "certificate": "https://coursera.org/",
-    "description": "Supervised/unsupervised learning, neural networks, and best practices."
+    "date": "2024-S2",
+    "link": "",
+    "description": "Computer Engineering Overview: Data Representation, CPU, OS and Linux, Frontend, Backend, SQL, Machine Learning."
   },
   {
-    "name": "Full Stack Open",
-    "provider": "University of Helsinki",
-    "status": "in-progress",
-    "date": "2025-03",
-    "certificate": "",
-    "description": "Modern web development with React, Node.js, GraphQL, and TypeScript."
+    "name": "Programming Methodology",
+    "provider": "Chulalongkorn University",
+    "status": "completed",
+    "date": "2024-S2",
+    "link": "https://mycourseville-default.s3.ap-southeast-1.amazonaws.com/useruploaded_course_files/2024_2/64792/materials/2110215_2024_Term02_Syllabus-1291-17362708163080.pdf",
+    "description": "Basic Java, OOP, Inheritance, Abstraction, Polymorphism, Thread"
   },
   {
-    "name": "Deep Learning Specialization",
-    "provider": "Coursera / deeplearning.ai",
-    "status": "planned",
-    "date": "2025-Q3",
-    "certificate": "",
-    "description": "CNN, RNN, transformers, and production ML systems."
+    "name": "Discrete Structure",
+    "provider": "Chulalongkorn University",
+    "status": "completed",
+    "date": "2025-S1",
+    "link": "",
+    "description": "Logic, Set, Function, Relation, Methods of proof & Mathematical Induction, Graphs & Trees, Number Theory, Theory of Computation, Counting."
   },
   {
-    "name": "AWS Solutions Architect",
-    "provider": "Amazon / A Cloud Guru",
-    "status": "planned",
-    "date": "2026-Q1",
-    "certificate": "",
-    "description": "Cloud infrastructure, deployment, and cost optimization on AWS."
+    "name": "Digital Computer Logic",
+    "provider": "Chulalongkorn University",
+    "status": "completed",
+    "date": "2025-S1",
+    "link": "https://mycourseville-default.s3.ap-southeast-1.amazonaws.com/useruploaded_course_files/2025_1/71490/materials/2110251_syllabus_2568-9242-17542804226793.pdf",
+    "description": "Combinational Logic, Two Level Logic, Multi Level Logic, Time Response, PALs and PLAs, Arithmetic Circuits, Sequential Logic Design, Finite State Machine, ASM Chart, State Optimization"
+  },
+  {
+    "name": "Data Structure",
+    "provider": "Chulalongkorn University",
+    "status": "completed",
+    "date": "2025-S1",
+    "link": "https://mycourseville-default.s3.ap-southeast-1.amazonaws.com/useruploaded_course_files/2025_1/71951/materials/2110211_2568_a_syllabus-660-17542411919481.pdf",
+    "description": "Complexity Analysis, Usage of STL and Implementation of Pair, Vector, Stack, Queue, Priority Queue, Pointer, Linked List, Tree, Hash"
+  },
+  {
+    "name": "Database System",
+    "provider": "Chulalongkorn University",
+    "status": "completed",
+    "date": "2025-S2",
+    "link": "https://mycourseville-default.s3.ap-southeast-1.amazonaws.com/useruploaded_course_files/2025_2/77387/materials/2110322_DB_CPSyllabusYear2_2568_6Jan2025-829602-17676809120859.pdf",
+    "description": "ER Diagram, Relational Model, Schema Refinement, Normalization, Relational Algebra, SQL, NoSQL, Indexing, Current Trend"
+  },
+  {
+    "name": "Operating System and System Program",
+    "provider": "Chulalongkorn University",
+    "status": "completed",
+    "date": "2025-S2",
+    "link": "https://mycourseville-default.s3.ap-southeast-1.amazonaws.com/useruploaded_course_files/2025_2/78554/materials/syl313_%E0%B9%80%E0%B8%97%E0%B8%AD%E0%B8%A1%E0%B8%9B%E0%B8%A5%E0%B8%B2%E0%B8%A2_2025_complete-335-17675736260984.pdf",
+    "description": "System Structure, Process Concept, Multithreaded, Scheduling, Synchronization, Memory Management, Virtual Memory, File System, Kernel Module"
+  },
+  {
+    "name": "Computer Engineering Mathematics",
+    "provider": "Chulalongkorn University",
+    "status": "completed",
+    "date": "2025-S2",
+    "link": "https://mycourseville-default.s3.ap-southeast-1.amazonaws.com/useruploaded_course_files/2025_2/78783/materials/2110201_2567_b_syllabus_short-660-17687303357551.pdf",
+    "description": "Linear Algebra: Solving Linear System, Linear Geometry, Algebra of Matrix, Subspace, Orthogonality, Linear Transform"
+  },
+  {
+    "name": "Algorithm Design",
+    "provider": "Chulalongkorn University",
+    "status": "completed",
+    "date": "2025-S2",
+    "link": "https://mycourseville-default.s3.ap-southeast-1.amazonaws.com/useruploaded_course_files/2025_2/78781/materials/2110327_2568_b_syllabus_short-660-17681856809065.pdf",
+    "description": "Brute Force, Sorting, Divide and Conquer, Dynamic Programming, Greedy Algorithm, Graph Algorithm, State Space Search, NP-Completeness"
+  },
+  {
+    "name": "Hardware Synthesis Laboratory",
+    "provider": "Chulalongkorn University",
+    "status": "completed",
+    "date": "2025-S2",
+    "link": "https://mycourseville-default.s3.ap-southeast-1.amazonaws.com/useruploaded_course_files/2025_2/78997/materials/syllabus-14532-17694788884234.pdf",
+    "description": "FPGA Basys3: FSM, Debugging, Memory, UART, CPU, ILA"
+  },
+  {
+    "name": "Computer System Architechure",
+    "provider": "Chulalongkorn University",
+    "status": "completed",
+    "date": "2025-S2",
+    "link": "https://www.mycourseville.com/sites/all/modules/courseville/files/ckfinder/userfiles/10206205867065073/images/Screenshot%202569-01-17%20at%2014_09_46_696b35ea84fc4.png",
+    "description": "Performance, Instruction Set Architecture, Single Cycle Processor, Multiple Cycle Processor, Pipeline, Flynn Taxonomy, Vector Processor, SuperScalar, VLIW, Cache, Virtual Memory, Storage, Quantum Computing, GPU"
   }
 ]

@@ -1,0 +1,71 @@
+{
+  "bio": "I'm currently studying Computer Engineering at Chulalongkorn University. I have a strong interest in Backend Development and Infrastructure.",
+
+  "contact": {
+    "email": "narumedsr.p@gmail.com",
+    "linkedin": "https://linkedin.com/in/narumedsr-p",
+    "github": "https://github.com/narumedsr-p",
+    "tel": "+66 93 565 6655"
+  },
+
+  "skills": [
+    {
+      "category": "Languages",
+      "items": [
+        "Python",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
+        "C++",
+        "Java",
+        "Bash"
+      ]
+    },
+    {
+      "category": "Frontend",
+      "items": ["Astro", "HTML / CSS"]
+    },
+    {
+      "category": "Backend",
+      "items": ["Node.js", "Express", "Spring Boot", "Hono", "Elysia", "NextJS"]
+    },
+    {
+      "category": "Tools & Platforms",
+      "items": ["Git", "GitHub Actions", "Docker", "Linux", "Postman"]
+    },
+    {
+      "category": "Database",
+      "items": ["PostgreSQL", "MongoDB", "SQLite"]
+    }
+  ],
+
+  "education": [
+    {
+      "degree": "Bachelor of Engineering, B.Eng. (Computer Engineering)",
+      "school": "Chulalongkorn University",
+      "period": "2024 – Present",
+      "detail": "GPA 3.94"
+    },
+    {
+      "degree": "Sci-Math High School",
+      "school": "Triam Udom Suksa Phatthanakan School",
+      "period": "2018 – 2024",
+      "detail": "GPA 3.99"
+    }
+  ],
+
+  "experience": [
+    {
+      "title": "Teaching Assistant — Computer Programming",
+      "company": "Chulalongkorn University",
+      "period": "Jun 2024 – Aug 2024",
+      "description": "Guided students through programming assignments during class sessions and Provided after-class assistance and answered questions via Discord"
+    },
+    {
+      "title": "Senior Backend of FECamp 19th Chula Engineering",
+      "company": "Chulalongkorn University",
+      "period": "Nov 2025 – Present",
+      "description": "Designed and implemented a scalable RESTful API for a Learning Management System (LMS) using Spring Boot and PostgreSQL, supporting real-time Q&A interactions for 500+ concurrent users"
+    }
+  ]
+}

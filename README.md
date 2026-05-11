@@ -4,14 +4,14 @@ Personal portfolio built with [Astro](https://astro.build) + Tailwind CSS, deplo
 
 ## Pages
 
-| Page | URL | Content file |
-|------|-----|--------------|
-| Home | `/` | `src/pages/index.astro` |
+| Page     | URL         | Content file                |
+| -------- | ----------- | --------------------------- |
+| Home     | `/`         | `src/pages/index.astro`     |
+| About    | `/about`    | `src/data/about.json`       |
 | Projects | `/projects` | `src/content/projects/*.md` |
-| Awards | `/awards` | `src/data/awards.json` |
-| Courses | `/courses` | `src/data/courses.json` |
-| Blog | `/blog` | `src/content/blog/*.md` |
-| Notes | `/notes` | `src/data/notes.txt` |
+| Awards   | `/awards`   | `src/data/awards.json`      |
+| Courses  | `/courses`  | `src/data/courses.json`     |
+| Blog     | `/blog`     | `src/content/blog/*.md`     |
 
 ---
 
@@ -75,28 +75,35 @@ Append to `src/data/courses.json`:
   "name": "Course Name",
   "provider": "Platform",
   "status": "planned",
-  "date": "2025-Q3",
+  "date": "2025-S1",
+  "link": "https://...",
   "certificate": "https://...",
   "description": "What it covers."
 }
 ```
+
 Status options: `"completed"` | `"in-progress"` | `"planned"`
 
-### Quick note
+- **`link`** — syllabus URL, shown as "Syllabus ↗" (optional)
+- **`certificate`** — certificate URL, shown as "Certificate ↗" (optional)
 
-Append a line to `src/data/notes.txt`:
+---
 
-```
-2025-06-01 | Your thought here. Just one line per note.
+## Show / hide pages
+
+Edit `src/data/config.json` — set `"enabled": false` to hide a page from the nav:
+
+```json
+{ "key": "awards", "enabled": false }
 ```
 
 ---
 
 ## Customize
 
-- **Your name / tagline**: Edit `src/pages/index.astro` — find `Your Name` and the `roles` array in the `<script>` tag.
+- **Name / tagline**: Edit `src/pages/index.astro` — find `Your Name` and the `roles` array in the `<script>` tag.
+- **Bio / skills / contact**: Edit `src/data/about.json`.
 - **GitHub link**: Search for `narumedsr-p` and replace with your username.
-- **Colors**: Edit `tailwind.config.mjs` — the `colors.accent.*` values.
 - **Repo base path**: If your repo is NOT named `narumedsr-p.github.io`, set `base: '/repo-name'` in `astro.config.mjs`.
 
 ---
@@ -107,7 +114,7 @@ Append a line to `src/data/notes.txt`:
 2. Go to **Settings → Pages → Source** → set to **GitHub Actions**.
 3. Push to `main` — the workflow in `.github/workflows/deploy.yml` builds and deploys automatically.
 
-Every time you push a content change (new `.md`, edited `.json`, new note line), the site rebuilds and deploys within ~30 seconds.
+Every time you push a content change (new `.md`, edited `.json`), the site rebuilds and deploys within ~30 seconds.
 
 ---
 

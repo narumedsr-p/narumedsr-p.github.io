@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import config from '../data/config.json';
 
 const projects = (await getCollection('projects', ({ data }) => !data.draft && data.featured))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -15,16 +16,19 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   <!-- Hero -->
   <section class="max-w-4xl mx-auto px-6 pt-20 pb-16">
     <div class="max-w-2xl">
-      <h1 class="text-5xl sm:text-6xl font-bold text-ink-900 mb-5 leading-tight tracking-tight">
-        Your Name
+      <h1 class="text-5xl sm:text-6xl font-bold text-ink-900 mb-5 leading-tight tracking-tight md:whitespace-nowrap">
+        Narumedsr Pitayachamrat
       </h1>
       <p class="text-xl text-ink-500 mb-2 font-light">
         <span id="typewriter"></span><span class="tw-cursor">|</span>
       </p>
       <p class="text-ink-500 mt-5 text-base leading-relaxed max-w-lg">
-        I build things for the web, explore machine learning, and write about what I learn.
-        Currently focused on [your current focus here].
+        I'm currently studying Computer Engineering at Chulalongkorn University.
+        I have a strong interest in Backend Development and Infrastructure.
       </p>
+      <a href="/about" class="inline-block mt-3 text-sm text-accent hover:underline underline-offset-4">
+        More about me →
+      </a>
       <div class="flex flex-wrap gap-3 mt-8">
         <a href="/projects" class="px-5 py-2.5 rounded-md text-sm font-medium bg-ink-900 text-paper-50 hover:bg-ink-700 transition-colors">
           View Projects
@@ -91,25 +95,28 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     <hr class="border-paper-300" />
   </div>
 
-  <!-- Quick nav -->
-  <section class="max-w-4xl mx-auto px-6 py-14">
-    <div class="grid sm:grid-cols-3 gap-4">
-      {[
-        { href: '/awards',  label: 'Awards',  desc: 'Achievements & recognitions' },
-        { href: '/courses', label: 'Courses', desc: 'Completed & planned learning' },
-        { href: '/notes',   label: 'Notes',   desc: 'Quick thoughts & ideas'       },
-      ].map(item => (
-        <a href={item.href} class="group block bg-paper-50 border border-paper-300 rounded-lg px-5 py-4 hover:border-ink-100 hover:shadow-sm transition-all">
-          <p class="font-semibold text-ink-900 group-hover:text-accent transition-colors mb-0.5">{item.label}</p>
-          <p class="text-sm text-ink-500">{item.desc}</p>
-        </a>
-      ))}
-    </div>
-  </section>
+  <!-- Quick nav — driven by config.json quickLink + enabled flags -->
+  {(() => {
+    const quickLinks = config.pages.filter(p => p.enabled && p.quickLink);
+    if (quickLinks.length === 0) return null;
+    const cols = quickLinks.length === 1 ? 'sm:grid-cols-1 max-w-xs' : quickLinks.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3';
+    return (
+      <section class="max-w-4xl mx-auto px-6 py-14">
+        <div class={`grid gap-4 ${cols}`}>
+          {quickLinks.map(item => (
+            <a href={item.href} class="group block bg-paper-50 border border-paper-300 rounded-lg px-5 py-4 hover:border-ink-100 hover:shadow-sm transition-all">
+              <p class="font-semibold text-ink-900 group-hover:text-accent transition-colors">{item.label}</p>
+              {item.desc && <p class="text-sm text-ink-500 mt-0.5">{item.desc}</p>}
+            </a>
+          ))}
+        </div>
+      </section>
+    );
+  })()}
 </Layout>
 
 <script>
-  const roles = ['Full-stack Developer', 'ML Enthusiast', 'Problem Solver', 'Lifelong Learner'];
+  const roles = ['Backend Developer', 'Problem Solver', 'Lifelong Learner'];
   let ri = 0, ci = 0, del = false;
   const el = document.getElementById('typewriter');
   function tick() {

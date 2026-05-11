@@ -15,7 +15,7 @@ export default {
           700: '#1a1a1a',   // primary body text
           500: '#374151',   // secondary text (readable on white)
           300: '#4b5563',   // muted text (still readable)
-          100: '#6b7280',   // metadata, dates
+          100: '#4b5563',   // metadata, dates
         },
         paper: {
           50:  '#ffffff',
