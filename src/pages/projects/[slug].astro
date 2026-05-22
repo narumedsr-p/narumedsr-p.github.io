@@ -40,6 +40,27 @@ const { Content } = await entry.render();
       </div>
     </header>
 
+    {entry.data.images && entry.data.images.length > 0 && (
+      <div class="mb-10">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="gallery">
+          {entry.data.images.map((src: string, i: number) => (
+            <button
+              class={`gallery-thumb rounded-lg overflow-hidden border border-paper-300 hover:border-ink-300 transition-colors focus:outline-none${i >= 3 ? ' gallery-extra hidden' : ''}`}
+              data-src={src}
+              data-index={i}
+            >
+              <img src={src} alt={`Screenshot ${i + 1}`} class="w-full h-36 object-cover" loading="lazy" />
+            </button>
+          ))}
+        </div>
+        {entry.data.images.length > 3 && (
+          <button id="gallery-toggle" class="mt-3 text-sm text-accent hover:underline underline-offset-4">
+            View all {entry.data.images.length} photos →
+          </button>
+        )}
+      </div>
+    )}
+
     <hr class="border-paper-300 mb-10" />
 
     <div class="prose">
@@ -49,4 +70,72 @@ const { Content } = await entry.render();
     <hr class="border-paper-300 mt-14 mb-8" />
     <a href="/projects" class="text-sm text-accent hover:underline underline-offset-4">← All projects</a>
   </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/85 items-center justify-center p-4">
+    <button id="lb-close" class="absolute top-4 right-5 text-white/70 hover:text-white text-3xl leading-none transition-colors" aria-label="Close">×</button>
+    <button id="lb-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-4xl leading-none transition-colors px-2" aria-label="Previous">‹</button>
+    <button id="lb-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-4xl leading-none transition-colors px-2" aria-label="Next">›</button>
+    <img id="lb-img" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" />
+    <p id="lb-counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-sm"></p>
+  </div>
 </Layout>
+
+<script>
+  const thumbs = document.querySelectorAll<HTMLButtonElement>('.gallery-thumb');
+  const lightbox = document.getElementById('lightbox')!;
+  const lbImg = document.getElementById('lb-img') as HTMLImageElement;
+  const lbCounter = document.getElementById('lb-counter')!;
+  const lbClose = document.getElementById('lb-close')!;
+  const lbPrev = document.getElementById('lb-prev')!;
+  const lbNext = document.getElementById('lb-next')!;
+
+  if (thumbs.length === 0) {
+    lbPrev.classList.add('hidden');
+    lbNext.classList.add('hidden');
+  }
+
+  const srcs = Array.from(thumbs).map(t => t.dataset.src ?? '');
+  let current = 0;
+
+  function open(index: number) {
+    current = index;
+    lbImg.src = srcs[current];
+    lbCounter.textContent = `${current + 1} / ${srcs.length}`;
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    if (srcs.length <= 1) { lbPrev.classList.add('hidden'); lbNext.classList.add('hidden'); }
+  }
+
+  function close() {
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+  }
+
+  function prev() { open((current - 1 + srcs.length) % srcs.length); }
+  function next() { open((current + 1) % srcs.length); }
+
+  const galleryToggle = document.getElementById('gallery-toggle');
+  if (galleryToggle) {
+    const total = srcs.length;
+    let expanded = false;
+    galleryToggle.addEventListener('click', () => {
+      expanded = !expanded;
+      document.querySelectorAll('.gallery-extra').forEach(el => el.classList.toggle('hidden', !expanded));
+      galleryToggle.textContent = expanded ? '← Show less' : `View all ${total} photos →`;
+    });
+  }
+
+  thumbs.forEach((btn, i) => btn.addEventListener('click', () => open(i)));
+  lbClose.addEventListener('click', close);
+  lbPrev.addEventListener('click', prev);
+  lbNext.addEventListener('click', next);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('hidden')) {
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    }
+  });
+</script>

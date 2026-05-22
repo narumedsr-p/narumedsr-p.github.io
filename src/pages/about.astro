@@ -73,8 +73,8 @@ import about from '../data/about.json';
       <div class="divide-y divide-paper-300 border-t border-paper-300">
         {about.education.map(ed => (
           <div class="py-5 flex flex-col sm:flex-row sm:gap-8">
-            <div class="sm:w-36 sm:flex-shrink-0 mb-1 sm:mb-0">
-              <span class="text-sm text-ink-300">{ed.period}</span>
+            <div class="sm:w-44 sm:flex-shrink-0 mb-1 sm:mb-0">
+              <span class="text-sm text-ink-300 whitespace-nowrap">{ed.period}</span>
             </div>
             <div>
               <p class="font-semibold text-ink-900">{ed.degree}</p>
@@ -94,8 +94,8 @@ import about from '../data/about.json';
       <div class="divide-y divide-paper-300 border-t border-paper-300">
         {about.experience.map(job => (
           <div class="py-5 flex flex-col sm:flex-row sm:gap-8">
-            <div class="sm:w-36 sm:flex-shrink-0 mb-1 sm:mb-0">
-              <span class="text-sm text-ink-300">{job.period}</span>
+            <div class="sm:w-44 sm:flex-shrink-0 mb-1 sm:mb-0">
+              <span class="text-sm text-ink-300 whitespace-nowrap">{job.period}</span>
             </div>
             <div>
               <p class="font-semibold text-ink-900">{job.title}</p>
