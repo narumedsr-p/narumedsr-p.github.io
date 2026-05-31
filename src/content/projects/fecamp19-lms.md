@@ -12,12 +12,18 @@ tech:
     "Nginx",
     "Claude Code",
   ]
-github: "https://github.com/narumedsr-p"
+github: "https://github.com/narumedsr-p/LMS-FECamp19th"
 images:
   - /images/fecamp19/1-Home.png
   - /images/fecamp19/2-MyClass.png
   - /images/fecamp19/3-Classroom(CamperView).png
   - /images/fecamp19/4-AskVCK.png
+  - /images/fecamp19/5-Profile-Info.png
+  - /images/fecamp19/6-Profile-Score.png
+  - /images/fecamp19/7-StaffInfo.png
+  - /images/fecamp19/8-CamperInfo-General.png
+  - /images/fecamp19/9-CamperInfo-Detail.png
+  - /images/fecamp19/10-PhaseSite.png
 featured: true
 draft: false
 date: 2026-01-01
@@ -29,7 +35,7 @@ FECamp 19 LMS is the internal web platform built for FECamp 19, the Faculty of E
 
 The system was designed to serve around 400 concurrent users and handle everything from distributing lecture materials to tracking exam performance and collecting feedback — all within a tightly role-gated access model.
 
-I was part of the backend team, responsible for designing and implementing the Spring Boot API, infrastructure deployment, and database management. The frontend was built separately by other team members and is not part of my contribution.
+I was part of the backend team in senior role, responsible for designing and implementing the Spring Boot API, infrastructure deployment, and database management. The frontend was built separately by other team members and is not part of my contribution.
 
 ## Features
 
